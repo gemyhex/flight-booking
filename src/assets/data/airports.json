@@ -1,0 +1,31 @@
+[{
+        "name": "Cairo Airport",
+        "code": "CAI",
+        "id": 1
+    },
+    {
+        "name": "Dubai International Airport",
+        "code": "DXB",
+        "id": 2
+    },
+    {
+        "name": "Chicago O\"Hare International Airport",
+        "code": "ORD",
+        "id": 3
+    },
+    {
+        "name": "Copenhagen Kastrup Airport",
+        "code": "CPH",
+        "id": 4
+    },
+    {
+        "name": "Denver Intl Airport",
+        "code": "DEN",
+        "id": 5
+    },
+    {
+        "name": "John F. Kennedy International Airport",
+        "code": "JFK",
+        "id": 6
+    }
+]

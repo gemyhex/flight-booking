@@ -1,0 +1,109 @@
+[{
+        "from": "CAI",
+        "to": "DXB",
+        "departure": "2022-05-25",
+        "return": "2022-05-28",
+        "type": "oneway",
+        "class": "economy",
+        "price": 500
+    },
+    {
+        "from": "CAI",
+        "to": "DXB",
+        "departure": "2022-05-25",
+        "return": "2022-05-28",
+        "type": "oneway",
+        "class": "economy",
+        "price": 300
+    },
+    {
+        "from": "CAI",
+        "to": "DXB",
+        "departure": "2022-05-25",
+        "return": "2022-05-28",
+        "type": "oneway",
+        "class": "fclass",
+        "price": 900
+    },
+    {
+        "from": "DXB",
+        "to": "CAI",
+        "departure": "2022-05-25",
+        "return": "2022-05-28",
+        "type": "oneway",
+        "class": "economy",
+        "price": 500
+    },
+    {
+        "from": "DXB",
+        "to": "CAI",
+        "departure": "2022-05-29",
+        "return": "2022-06-06",
+        "type": "oneway",
+        "class": "economy",
+        "price": 300
+    },
+    {
+        "from": "DXB",
+        "to": "CAI",
+        "departure": "2022-05-26",
+        "return": "2022-06-01",
+        "type": "oneway",
+        "class": "fclass",
+        "price": 900
+    },
+    {
+        "from": "DXB",
+        "to": "CAI",
+        "departure": "2022-05-25",
+        "return": "2022-05-28",
+        "type": "roundtrip",
+        "class": "economy",
+        "price": 850
+    },
+    {
+        "from": "CAI",
+        "to": "DXB",
+        "departure": "2022-05-29",
+        "return": "2022-06-06",
+        "type": "roundtrip",
+        "class": "economy",
+        "price": 300
+    },
+    {
+        "from": "CAI",
+        "to": "DXB",
+        "departure": "2022-05-29",
+        "return": "2022-06-06",
+        "type": "roundtrip",
+        "class": "economy",
+        "price": 450
+    },
+    {
+        "from": "CAI",
+        "to": "DXB",
+        "departure": "2022-05-29",
+        "return": "2022-06-06",
+        "type": "roundtrip",
+        "class": "economy",
+        "price": 200
+    },
+    {
+        "from": "CAI",
+        "to": "DXB",
+        "departure": "2022-05-29",
+        "return": "2022-06-06",
+        "type": "roundtrip",
+        "class": "fclass",
+        "price": 800
+    },
+    {
+        "from": "ORD",
+        "to": "JFK",
+        "departure": "2022-05-26",
+        "return": "2022-06-01",
+        "type": "roundtrip",
+        "class": "fclass",
+        "price": 900
+    }
+]

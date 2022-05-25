@@ -1,26 +1,85 @@
 <template>
-  <div class="home">
-    <button @click="oneWayGet" v-if="!isLoading">Get One Way</button>
-    <button disabled v-else>Loading ...</button>
-    <ul class="airports" v-if="items">
-      <li>Airports: </li>
-      <li v-for="(item, i) in items.airports" :key="i">
-        {{ item.name }} ({{ item.code }})
-        <!-- <div>
-          <ul>
-            <li v-for="(subitem, i) in item" :key="i">
-              {{ subitem }}
-            </li>
-          </ul>
-        </div> -->
-      </li>
-    </ul>
+  <div class="container home">
+    <div class="card mt-5">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center align-items-center">
+            <label for=""></label>
+            <div class="mx-2">
+              <input class="mx-1" type="radio" value="oneway" name="type" id="oneway" title="Oneway"
+                v-model="flight_book.type">
+              <label for="oneway">Oneway </label>
+            </div>
+            <div class="mx-2">
+              <input class="mx-1" type="radio" value="roundtrip" name="type" id="roundtrip" title="Round Trip"
+                v-model="flight_book.type">
+              <label for="roundtrip">Round Trip </label>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+            <label for="from">From: </label>
+            <select name="airports" id="airports" class="form-select list1" v-model="flight_book.from"
+              @change="onChange($event.target.value)">
+              <option selected disabled>Select Option</option>
+              <option v-for="air in list1" :key="air.id" :value="air.code">
+                {{ air.name }}
+              </option>
+            </select>
+          </div>
+          <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+            <label for="from">To: </label>
+            <select name="airports" id="airports" class="form-select list2" v-model="flight_book.to"
+              @change="onChange($event.target.value)">
+              <option selected disabled>Select Option</option>
+              <option v-for="air in list2" :key="air.id" :value="air.code">
+                {{ air.name }}
+              </option>
+            </select>
+          </div>
+          <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+            <label for="from">Departure Date: </label>
+            <input type="date" class="form-select" v-model="flight_book.departure">
+          </div>
+          <div class="col-12 col-lg-6 col-md-6 col-sm-12" v-if="flight_book.type != 'oneway'">
+            <label for="from">Return Date: </label>
+            <input type="date" class="form-select" v-model="flight_book.return">
+          </div>
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+            <label for="from">Adults: </label>
+            <input type="number" class="form-select" placeholder="Adult(s)" min="0" max="20"
+              v-model="flight_book.adults">
+          </div>
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+            <label for="from">Children: </label>
+            <input type="number" class="form-select" placeholder="Child(ren)" min="0" max="20"
+              v-model="flight_book.children">
+          </div>
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+            <label for="from">Infants: </label>
+            <input type="number" class="form-select" placeholder="Infant(s)" min="0" max="20"
+              v-model="flight_book.infants">
+          </div>
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+            <label for="from">Class: </label>
+            <select class="form-select" v-model="flight_book.class">
+              <option value="economy" selected>Economy</option>
+              <option value="fclass">First Class</option>
+            </select>
+          </div>
+          <div class="col-12 mt-2 px-5">
+            <button class="btn btn-success" @click="bookFlight">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import axios from 'axios'
+import airports from '@/assets/data/airports.json'
+import bookings from '@/assets/data/bookings.json'
 export default {
   name: 'HomeView',
   data() {
@@ -38,24 +97,51 @@ export default {
         currency: null || 'USD',
         url: `https://api.flightapi.io`,
       },
-      items: {},
+      list1: airports,
+      list2: airports,
+      flights: bookings,
+      filteredFlights: null,
       isLoading: false,
+      flight_book: {
+        from: null,
+        to: null,
+        departure: null,
+        return: null,
+        type: 'oneway',
+        adults: 0,
+        children: 0,
+        infants: 0,
+        class: 'economy',
+      }
     }
   },
   methods: {
-    oneWayGet() {
-      this.isLoading = true
-      axios.get(`${this.flight_details.url}/${this.flight_details.flightType}/${this.flight_details.api_key}/${this.flight_details.departure_location}/${this.flight_details.arrival_location}/${this.flight_details.date_of_departure}/${this.flight_details.number_of_adults}/${this.flight_details.number_of_children}/${this.flight_details.number_of_infants}/${this.flight_details.cabin_class}/${this.flight_details.currency}`)
-        .then(res => {
-          console.log(res.data.airports);
-          this.isLoading = false
-          this.items = res.data
-        })
-        .catch(err => {
-          console.log(err);
-          this.isLoading = false
-        })
+    bookFlight() {
+      if (this.flight_book.type == 'oneway') {
+        this.filteredFlights = this.flights.filter(flight => flight.from == this.flight_book.from
+          && flight.to == this.flight_book.to
+          && flight.class == this.flight_book.class
+          && flight.departure == this.flight_book.departure
+          && flight.return == this.flight_book.return
+          && flight.type == this.flight_book.type)
+      }
+      else if (this.flight_book.type == 'roundtrip') {
+        this.filteredFlights = this.flights.filter(flight => flight.from == this.flight_book.from
+          && flight.to == this.flight_book.to
+          && flight.class == this.flight_book.class
+          && flight.departure == this.flight_book.departure
+          && flight.return == this.flight_book.return
+          && flight.type == this.flight_book.type)
+      }
+      console.log('filter: ', this.filteredFlights);
+      console.log('sent: ', this.flight_book);
+    },
+    onChange() {
+      if (this.flight_book.from == this.flight_book.to) {
+        alert('Cannot choose the same destination')
+        this.flight_book.to = ""
+      }
     }
-  }
+  },
 }
 </script>
