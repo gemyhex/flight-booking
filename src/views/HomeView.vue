@@ -122,7 +122,6 @@ export default {
           && flight.to == this.flight_book.to
           && flight.class == this.flight_book.class
           && flight.departure == this.flight_book.departure
-          && flight.return == this.flight_book.return
           && flight.type == this.flight_book.type)
       }
       else if (this.flight_book.type == 'roundtrip') {
@@ -133,8 +132,8 @@ export default {
           && flight.return == this.flight_book.return
           && flight.type == this.flight_book.type)
       }
-      console.log('filter: ', this.filteredFlights);
-      console.log('sent: ', this.flight_book);
+      this.$store.state.flights = this.filteredFlights
+      this.$router.push({ name: 'flights' })
     },
     onChange() {
       if (this.flight_book.from == this.flight_book.to) {
