@@ -2,9 +2,10 @@
   <div class="container about">
     <h2 class="text-center fw-bold mb-3">Available Flights</h2>
     <hr class="my-3">
-    <div class="card-t mx-3 my-5" v-for="(flight, i) in flights" :key="i">
-      <div class="card-body p-0 d-flex justify-content-around align-items-center">
-        <div class="left-side d-flex flex-column justify-content-center align-items-center px-2">
+    <div class="card-t mx-0 my-5" v-for="(flight, i) in flights" :key="i">
+      <div class="row card-body py-3">
+        <div
+          class="col-12 col-lg-8 col-md-8 col-sm-12 left-side d-flex flex-column justify-content-center align-items-center px-2">
 
           <span class="date fw-lighter">{{ flight.departure }}</span>
           <h4 class="">
@@ -28,7 +29,8 @@
           </h4>
           <span class="date">{{ flight.arrival }}</span>
         </div>
-        <div class="details d-flex flex-column justify-content-center align-items-center px-2">
+        <div
+          class="col-12 col-lg-4 col-md-4 col-sm-12 details d-flex flex-column justify-content-center align-items-center px-2">
           <div>
             <h3 class="fw-bold">${{ flight.price }}</h3>
           </div>
@@ -78,19 +80,19 @@ export default {
 
   .card-body {
     min-height: 180px;
-    height: 180px;
     border-bottom: 1px solid #eee;
-    border-right: 1px solid #eee;
 
     .left-side {
-      width: 70%;
       position: relative;
     }
 
     .details {
-      width: 30%;
       border-left: 1px solid #eee;
-      height: 100%;
+
+      @media screen and (max-width: 767px) {
+        border-left: 0 !important;
+        border-top: 1px solid #eee;
+      }
     }
   }
 
